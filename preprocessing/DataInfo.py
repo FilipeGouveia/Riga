@@ -31,7 +31,7 @@ class DataInfo(object):
         print("\t" + self.feature_labels[-1])
 
     def generate_protected_classification_csv(self, label):
-        path_str = "results/" + self.filename + "/" + self.filename + "-" + label + ".csv"
+        path_str = "../datasets/preprocessing/" + self.filename + "/" + self.filename + "-" + label + ".csv"
         filepath = Path(path_str)
         filepath.parent.mkdir(parents=True, exist_ok=True)
         headers = self.non_protected_labels.copy()
