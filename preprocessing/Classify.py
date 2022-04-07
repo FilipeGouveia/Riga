@@ -511,7 +511,7 @@ if __name__ == '__main__':
     #processCompas()
     #processGerman()
     #processTitanic()
-    processRicci()
+    #processRicci()
 
 
 
