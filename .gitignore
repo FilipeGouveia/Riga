@@ -2,4 +2,5 @@ __pycache__
 */riga-env
 */results
 datasets/preprocessing
+*.dot
 

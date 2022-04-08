@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -15,6 +16,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.compose import make_column_selector as selector
 from sklearn.preprocessing import StandardScaler
 from sklearn.compose import ColumnTransformer
+from pathlib import Path
 
 
 
@@ -103,9 +105,9 @@ def classifySVC(data, target):
     print()
 
 
-def classifyDecisionTreeClassifier(data, target, to_print=False, to_draw=False, out_draw = "tree.dot"):
+def classifyDecisionTreeClassifier(data, target, to_print=False, to_draw=False, out_draw = "tree.dot", max_depth=None):
     data_train, data_test, target_train, target_test = train_test_split(data, target, random_state=42)
-    model = DecisionTreeClassifier()
+    model = DecisionTreeClassifier(max_depth=max_depth)
     _ = model.fit(data_train, target_train)
 
     score = model.score(data_test, target_test)
@@ -172,10 +174,10 @@ def classifyDecisionTreeClassifier(data, target, to_print=False, to_draw=False, 
                     )
                 )
         
-        if to_draw:
-            dot_data = tree.export_graphviz(model, out_file = out_draw)
-            #$ dot -Tps tree.dot -o tree.ps      (PostScript format)
-            #$ dot -Tpng tree.dot -o tree.png    (PNG format)
+    if to_draw:
+        dot_data = tree.export_graphviz(model, out_file = out_draw, feature_names=data.columns, class_names=True)
+        #$ dot -Tps tree.dot -o tree.ps      (PostScript format)
+        #$ dot -Tpng tree.dot -o tree.png    (PNG format)
 
 
 
@@ -503,6 +505,32 @@ def processRicci():
     print()
 
 
+def DrawDecisionTrees(depth=5):
+    files = ["../datasets/preprocessing/adult-one-hot/adult-one-hot-Age_Age <= 28.00.csv",
+        "../datasets/preprocessing/adult-all-cat/adult-all-cat-Race.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Race_Amer-Indian-Eskimo.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Race_Asian-Pac-Islander.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Race_Black.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Race_Other.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Race_White.csv",
+        "../datasets/preprocessing/adult-all-cat/adult-all-cat-Sex.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Sex_Female.csv",
+        "../datasets/preprocessing/adult-hybrid/adult-hybrid-Sex_Male.csv",
+        "../datasets/preprocessing/compas/compas-Asian.csv",
+        "../datasets/preprocessing/compas/compas-Hispanic.csv",
+        "../datasets/preprocessing/compas/compas-Native_American.csv",
+        "../datasets/preprocessing/compas/compas-Other.csv",
+        "../datasets/preprocessing/compas/compas-Female.csv",
+        "../datasets/preprocessing/german-hybrid/german-hybrid-foreign_worker.csv",
+        "../datasets/preprocessing/ricci-one-hot/ricci-one-hot-Race_B.csv",
+        "../datasets/preprocessing/ricci-one-hot/ricci-one-hot-Race_H.csv",]
+
+    for f in files:
+        filename = Path(f).stem
+        data, target = extractDataTarget(f)
+        classifyDecisionTreeClassifier(data, target, to_draw=True, out_draw = filename + ".dot", max_depth=4)
+    
+    print()
 
 #==============================================================================
 
@@ -512,6 +540,9 @@ if __name__ == '__main__':
     #processGerman()
     #processTitanic()
     #processRicci()
-
-
+    depth = 5
+    if len(sys.argv) > 1:
+        depth = sys.argv[1]
+    DrawDecisionTrees(depth)
+    print()
 
