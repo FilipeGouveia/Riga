@@ -4,3 +4,6 @@ __pycache__
 datasets/preprocessing
 *.dot
 
+Datasets/Original
+datasets
+ProxyResults

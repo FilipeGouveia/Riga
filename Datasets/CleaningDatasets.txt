@@ -1,0 +1,115 @@
+Remove " quote marks from all datasets
+Follow 
+ - https://wires.onlinelibrary.wiley.com/doi/full/10.1002/widm.1452
+ - https://arxiv.org/abs/2110.00530
+
+# Adult Dataset
+
+https://archive.ics.uci.edu/ml/datasets/adult
+
+Data Set Characteristics: Multivariate
+Number of Instances: 48842
+Area: Social
+Attribute Characteristics: Categorical, Integer
+Number of Attributes: 14
+Date Donated 1996-05-01
+Associated Tasks: Classification
+Missing Values? Yes
+Number of Web Hits: 2475821
+
+Clean:
+ - Remove entries with empty Values
+ - Remove fnlwgt attribute
+
+-> age distribution?
+ -> consider {<25, 25-60, >60}
+ -> consider {<=28, 28-37, 37-48, >48}
+
+# Bank-marketing Dataset
+
+https://archive.ics.uci.edu/ml/datasets/Bank%2BMarketing
+
+Data Set Characteristics: Multivariate
+Number of Instances: 45211
+Area: Business
+Attribute Characteristics: Real
+Number of Attributes: 17
+Date Donated 2012-02-14
+Associated Tasks: Classification
+Missing Values? N/A
+Number of Web Hits: 1747553
+
+
+Appears to be clean
+
+
+# Communities and Crime Dataset
+
+https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime
+
+Data Set Characteristics:  Multivariate
+Number of Instances: 1994
+Area: Social
+Attribute Characteristics: Real
+Number of Attributes: 128
+Date Donated 2009-07-13
+Associated Tasks: Regression
+Missing Values? Yes
+Number of Web Hits: 355388
+
+Clean:
+ - remove columns with empty Values
+ - transform ViolenCrimesPerPop (target) with "high-crime" and "low-crime" if value > 0.7
+
+# Diabeted Dataset
+
+
+
+Clean :
+ - remove columns: encounter_id, patient_nbr, weight, payer_code, medical_specialty
+ - remove entries with missing values (diag_1, diag_2, diag_3)
+ - remove entries with readmitted with value "no record of readmission" or "NO"
+    - given that this is the classification class with values in "<30" ">30", "NO", I dont no if this should be eliminated
+
+# KDD datasets
+
+Clean :
+ - remove column instance_weight
+ - remove columns: migration_code_change_in_msa, migration_code_change_in_reg, migration_code_move_within_reg, migration_prev_res_in_sunbelt
+ - remove entries with empty values
+
+
+# Law School
+
+http://www.seaphe.org/databases.php
+https://tensorflow.google.cn/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_Pandas_Case_Study
+https://storage.googleapis.com/lawschool_dataset/bar_pass_prediction.csv
+
+
+Clean:
+ - Transform sas7bdat into csv
+ - remove entries with empty values
+ - remove columns: ID
+
+# OULAD
+
+
+Clean:
+ - Remove column id_student
+ - Remove empty values
+ - Consider removing the entries with final result = withdrawn
+ - consider transforming final result distinction to pass
+ 
+
+ # Compas
+
+
+
+Clean:
+ - remove id, name, first, last, dob, c_jail_in, c_jail_out, c_case_number,
+    c_offense_date, c_arrest_date, c_days_from_compas, r_case_number, r_days_from_arrest, r_offense_date
+    r_jail_in, r_jail_out, violent_recid, vr_case_number, vr_offense_date, compas_screening_date, 
+    screening_date, v_screening_date, in_custody, out_custody, priors_count.1
+ - remove columns with many empty values: vr_charge_desc, vr_charge_degree, r_charge_desc, r_charge_degree
+    c_charge_desc
+ - make a version with only entries with days_b_screening_arrest <=30
