@@ -3,7 +3,19 @@ __pycache__
 */results
 datasets/preprocessing
 *.dot
-
-Datasets/Original
+Datasets/Original/Adult
+Datasets/Original/bank-marketing
+Datasets/Original/communities\ and\ crime
+Datasets/Original/compas
+Datasets/Original/credit\ card\ clients
+Datasets/Original/diabetes
+Datasets/Original/german-credit
+Datasets/Original/KDD\ Census-Income
+Datasets/Original/lawschool
+Datasets/Original/OULAD
+Datasets/Original/ricci
+Datasets/Original/students\ performance
+Datasets/Generated/KDD
+Datasets/Cleaned/KDD
 datasets
 ProxyResults
