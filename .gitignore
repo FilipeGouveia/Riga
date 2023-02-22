@@ -1,7 +1,7 @@
 __pycache__
 */riga-env
 */results
-datasets/preprocessing
+datasets-old/preprocessing
 *.dot
 Datasets/Original/Adult
 Datasets/Original/bank-marketing
@@ -17,5 +17,4 @@ Datasets/Original/ricci
 Datasets/Original/students\ performance
 Datasets/Generated/KDD
 Datasets/Cleaned/KDD
-datasets
 ProxyResults
